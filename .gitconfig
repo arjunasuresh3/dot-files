@@ -1,0 +1,33 @@
+[user]
+	name = Arjuna
+	email = arjunasuresh3@gmail.com
+[apply]
+    whitespace = fix
+[alias]
+    st = status
+    ci = commit
+    amend = commit --amend
+    co = checkout
+    br = branch
+    lg = log --graph --date=short
+    prom = pull --rebase origin master
+    pom = push origin master
+    what = whatchanged -p
+    df = diff --word-diff=color
+    staged = diff --cached
+[color]
+    branch = auto
+    diff = auto
+    interactive = auto
+    ui = always
+    status = auto
+    pager = true
+[format]
+    pretty="%Cgreen%h %Cred%cr(%cd) %Cblue(%an) %C(yellow)%d %Creset%s"
+[core]
+    editor = /usr/bin/emacs
+    whitespace = fix
+    autocrlf = input
+    pager = less -FRSX
+[http]
+    sslverify = false
