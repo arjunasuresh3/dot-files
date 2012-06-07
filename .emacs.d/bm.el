@@ -385,7 +385,7 @@ over overlays with lower priority.  *Don't* use a negative number."
     (((class color)
       (background light)) (:foreground "White" :background "DarkOrange1"))
     (((class color)
-      (background dark))  (:foreground "Black" :background "DarkOrange1")))
+      (background dark))  (:foreground "Black" :background "DimGray")))
   "Face used to highlight current line."
   :group 'bm)
 
