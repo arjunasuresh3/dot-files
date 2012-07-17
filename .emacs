@@ -1,7 +1,7 @@
 ;;File:		.emacs
 ;;Author:   	Arjun Suresh
 
-;; Time-stamp: <Last changed 28-03-2012 18:42:12 by Arjun Suresh, sarjun>
+;; Time-stamp: <Last changed 17-07-2012 18:14:09 by Arjun Suresh, sarjun>
 
 ;; This file is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -340,3 +340,10 @@ interpreter-mode-alist))
 ;;load pep8
 
 (require 'python-pep8)
+
+(defun my-ido-hippie-expand-filename ()
+      "Offer ido-based completion for the filename at point."
+      (interactive)
+      (my-ido-hippie-expand-with
+       (make-hippie-expand-function '(try-complete-file-name))))
+    (global-set-key (kbd "C-c C-f") 'my-ido-hippie-expand-filename)
