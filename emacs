@@ -1,7 +1,7 @@
 ;;File:		.emacs
 ;;Author:   	Arjun Suresh
 
-;; Time-stamp: <Last changed 17-07-2012 18:14:09 by Arjun Suresh, sarjun>
+;; Time-stamp: <Last changed 19-07-2012 10:37:49 by Arjun Suresh, sarjun>
 
 ;; This file is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -124,7 +124,7 @@
 ;; Python mode
 ;; =============
 ;;
-(load "/home/sarjun/.emacs.d/python-mode/python-mode.el")
+(load "~/.emacs.d/python-mode/python-mode.el")
 (setq auto-mode-alist (cons '("\\.py$" . python-mode) auto-mode-alist))
 (setq interpreter-mode-alist (cons '("python" . python-mode)
 interpreter-mode-alist))
@@ -337,13 +337,45 @@ interpreter-mode-alist))
   (aset buffer-display-table ?\^M []))
 
 
-;;load pep8
+;; Trying Pep8
+;; Mandatory
+(load-file "~/.emacs.d/emacs-for-python/epy-init.el")
+(add-to-list 'load-path "~/.emacs.d/emacs-for-python/") ;; tell where to load the various files
 
-(require 'python-pep8)
+;; Each of them enables different parts of the system.
+;; Only the first two are needed for pep8, syntax check.
+(require 'epy-setup) ;; It will setup other loads, it is required!
+(require 'epy-python) ;; If you want the python facilities [optional]
+(require 'epy-completion) ;; If you want the autocompletion settings [optional]
+(require 'epy-editing) ;; For configurations related to editing [optional]
 
-(defun my-ido-hippie-expand-filename ()
-      "Offer ido-based completion for the filename at point."
-      (interactive)
-      (my-ido-hippie-expand-with
-       (make-hippie-expand-function '(try-complete-file-name))))
-    (global-set-key (kbd "C-c C-f") 'my-ido-hippie-expand-filename)
+;; Define f10 to previous error
+;; Define f11 to next error
+(require 'epy-bindings) ;; For my suggested keybindings [optional]
+
+;; Some shortcut that do not collide with gnome-terminal,
+;; otherwise, "epy-bindings" define f10 and f11 for them.
+(global-set-key [f2] 'flymake-goto-prev-error)
+(global-set-key [f3] 'flymake-goto-next-error)
+
+;; Next two lines are the checks to do. You can add more if you wish.
+;; (epy-setup-checker "/gsunil/ZeOmega/Selenium/jiva/bin/pyflakes %f") ;; For python syntax check
+;; (epy-setup-checker "/gsunil/ZeOmega/Selenium/jiva/bin/pep8 -r --ignore W601,E501 %f") ;; For pep8 check
+
+
+(put 'set-goal-column 'disabled nil)
+
+;;full screen
+
+(defun toggle-fullscreen (&optional f)
+  (interactive)
+  (let ((current-value (frame-parameter nil 'fullscreen)))
+    (set-frame-parameter nil 'fullscreen
+                         (if (equal 'fullboth current-value)
+                             (if (boundp 'old-fullscreen) old-fullscreen nil)
+                           (progn (setq old-fullscreen current-value)
+                                  'fullboth)))))
+(global-set-key [f11] 'toggle-fullscreen)
+
+;;refreshes current file when changes on disk
+(global-auto-revert-mode t)
