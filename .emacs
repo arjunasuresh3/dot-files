@@ -1,7 +1,7 @@
 ;;File:		.emacs
 ;;Author:   	Arjun Suresh
 
-;; Time-stamp: <Last changed 19-07-2012 10:37:49 by Arjun Suresh, sarjun>
+;; Time-stamp: <Last changed 29-08-2012 10:45:08 by Arjun Suresh, sarjun>
 
 ;; This file is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -11,6 +11,8 @@
 ;; what kind of system are we using? 
 (defconst console-p (eq (symbol-value 'window-system) nil)
   "Are we running in a console (non-X) environment?")
+
+(setq initial-scratch-message "")
 
 ;; Keyboard
 ;; ============
