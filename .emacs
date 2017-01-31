@@ -1,7 +1,7 @@
 ;;File:		.emacs
 ;;Author:   	Arjun Suresh
 
-;; Time-stamp: <Last changed 29-08-2012 10:45:08 by Arjun Suresh, sarjun>
+;; Time-stamp: <Last changed 16-01-2017 13:04:27 by , vagrant>
 
 ;; This file is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -381,3 +381,8 @@ interpreter-mode-alist))
 
 ;;refreshes current file when changes on disk
 (global-auto-revert-mode t)
+
+(setq term-setup-hook
+'(lambda ()
+(setq keyboard-translate-table "\C-@\C-a\C-b\C-c\C-d\C-e\C-f\C-g\C-?")
+(global-set-key "\M-h" 'help-for-help)))
